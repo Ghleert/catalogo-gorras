@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo | Artículos Promocionales</title>
+  <meta name="description" content="Catálogo de gorras promocionales: clásicas, trucker, premium y más.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+      background-color: #fafafa;
+      color: #333;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
+    .header h1 {
+      font-weight: 600;
+      font-size: 2.2rem;
+      color: #222;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2.2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .producto {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .producto:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .producto-header {
+      padding: 1.2rem 1.2rem 0.8rem;
+      text-align: center;
+    }
+
+    .producto-header h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.4rem;
+    }
+
+    .producto-header p {
+      font-size: 0.95rem;
+      color: #555;
+      font-style: italic;
+    }
+
+    .imagen-contenedor {
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%; /* 1:1 aspect ratio para 400x400 */
+      position: relative;
+      background: #f8f8f8;
+      overflow: hidden;
+    }
+
+    .imagen-contenedor img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Mantiene proporciones sin recortar */
+      padding: 1rem;
+      transition: opacity 0.3s ease;
+    }
+
+    .producto-body {
+      padding: 1.2rem;
+      border-top: 1px solid #eee;
+    }
+
+    .descripcion {
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .selector {
+      margin-bottom: 1rem;
+    }
+
+    .selector label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .selector select {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      font-size: 0.95rem;
+      color: #333;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .selector select:focus {
+      outline: none;
+      border-color: #4a6cf7;
+      box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.15);
+    }
+
+    .precio {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #2e7d32;
+      text-align: center;
+      margin-top: 0.5rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed #eee;
+    }
+
+    .precio::before {
+      content: "Total: $";
+      font-size: 1rem;
+      font-weight: 500;
+      color: #666;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .catalogo {
+        grid-template-columns: 1fr;
+      }
+      body {
+        padding: 1.2rem 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>🪡 Catálogo de Gorras Promocionales</h1>
+    <p>Calidad, durabilidad y estilo en cada pieza. Precios por volumen.</p>
+  </header>
+
+  <main class="catalogo" id="catalogo"></main>
+
+  <footer>
+    <p>© 2025 Catálogo Promocional — Listo para producción</p>
+  </footer>
+
+  <script>
+    const productos = [
+      {
+        id: 1,
+        nombre: "Gorra Clásica-Básica",
+        descripcion: "Gorra con broche de velcro ajustable. Botón forrado. Ojillos bordados.",
+        materiales: "Poliéster",
+        colores: [
+          { nombre: "Blanco", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/400-ACRILICO-BLANCO.jpg" },
+          { nombre: "Tinto", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/400-ACRILICO-ROYAL.jpg" }
+        ],
+        precios: {
+          "0-100": 85.00,
+          "101-200": 78.00,
+          "201-300": 72.00
+        }
+      },
+      {
+        id: 2,
+        nombre: "Visera",
+        descripcion: "Visera con broche de velcro ajustable.",
+        materiales: "Poliéster",
+        colores: [
+          { nombre: "Azul", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/VISERA-AZUL.jpg" },
+          { nombre: "Blanco", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/VISERA-BLANCO.jpg" },
+          { nombre: "Negro", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/VISERA-NEGRO.jpg" },
+          { nombre: "Rojo", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/VISERA-ROJO.jpg" }
+        ],
+        precios: {
+          "0-100": 65.00,
+          "101-200": 59.00,
+          "201-300": 54.00
+        }
+      },
+      {
+        id: 3,
+        nombre: "Gorra Premium Algodón",
+        descripcion: "Gorra de algodón con broche de velcro ajustable. 5 Gajos. Botón forrado. Ojillos metálicos.",
+        materiales: "Algodón",
+        colores: [
+          { nombre: "Amarillo", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GORRA-ALGODON-AMARILLO.jpg" },
+          { nombre: "Azul Marino", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GORRA-ALGODON-AZUL-MARINO.jpg" },
+          { nombre: "Azul Rey", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GORRA-ALGODON-AZUL-REY.jpg" },
+          { nombre: "Blanco", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GORRA-ALGODON-BLANCO.jpg" },
+          { nombre: "Kaki", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GORRA-ALGODON-KAKI.jpg" },
+          { nombre: "Naranja", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GORRA-ALGODON-NARANJA.jpg" },
+          { nombre: "Negro", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GORRA-ALGODON-NEGRO.jpg" },
+          { nombre: "Rojo", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GORRA-ALGODON-ROJO.jpg" },
+          { nombre: "Verde", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GORRA-ALGODON-VERDE.jpg" }
+        ],
+        precios: {
+          "0-100": 110.00,
+          "101-200": 98.00,
+          "201-300": 92.00
+        }
+      },
+      {
+        id: 4,
+        nombre: "Gorra Trucker de Malla Clásica",
+        descripcion: "Broche de plástico, visera rígida y color uniforme. 1 gajo frontal sólido + 4 gajos de malla trasera.",
+        materiales: "Poliéster",
+        colores: [
+          { nombre: "Azul", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/TRUCKER-AZUL.jpg" },
+          { nombre: "Azul Marino", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/TRUCKER-AZUL-MARINO.jpg" },
+          { nombre: "Negro", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/TRUCKER-NEGRO.jpg" },
+          { nombre: "Rojo", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/TRUCKER-ROJO.jpg" }
+        ],
+        precios: {
+          "0-100": 95.00,
+          "101-200": 87.00,
+          "201-300": 81.00
+        }
+      },
+      {
+        id: 5,
+        nombre: "Gorra Clásica de 6 Gajos Gabardina",
+        descripcion: "Estructura dura, 6 gajos, ojillos bordados, botón forrado, velcro ajustable, puntada frontal de seguridad.",
+        materiales: "Gabardina y Algodón",
+        colores: [
+          { nombre: "Blanco", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GABARDINA-BLANCO.jpg" },
+          { nombre: "Carbón", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GABARDINA-CARBON.jpg" },
+          { nombre: "Azul Marino", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GABARDINA-AZUL-MARINO.jpg" },
+          { nombre: "Naranja", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GABARDINA-NARANJA.jpg" },
+          { nombre: "Negro", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GABARDINA-NEGRO.jpg" },
+          { nombre: "Rojo", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GABARDINA-ROJO.jpg" },
+          { nombre: "Royal", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GABARDINA-ROYAL.jpg" },
+          { nombre: "Verde Bandera", imagen: "https://articulospromocionalescdmx.com/wp-content/uploads/2022/12/GABARDINA-VERDE-BANDERA.jpg" }
+        ],
+        precios: {
+          "0-100": 105.00,
+          "101-200": 95.00,
+          "201-300": 88.00
+        }
+      }
+    ];
+
+    function renderCatalogo() {
+      const container = document.getElementById('catalogo');
+      container.innerHTML = productos.map(p => `
+        <article class="producto" data-id="${p.id}">
+          <div class="producto-header">
+            <h2>${p.nombre}</h2>
+            <p>${p.materiales}</p>
+          </div>
+
+          <div class="imagen-contenedor">
+            <img id="img-${p.id}" src="${p.colores[0].imagen}" alt="${p.nombre} - ${p.colores[0].nombre}" loading="lazy">
+          </div>
+
+          <div class="producto-body">
+            <p class="descripcion">${p.descripcion}</p>
+
+            <div class="selector">
+              <label for="color-${p.id}">Color</label>
+              <select id="color-${p.id}" onchange="cambiarColor(${p.id})">
+                ${p.colores.map((c, i) => `<option value="${c.imagen}" ${i === 0 ? 'selected' : ''}>${c.nombre}</option>`).join('')}
+              </select>
+            </div>
+
+            <div class="selector">
+              <label for="rango-${p.id}">Cantidad</label>
+              <select id="rango-${p.id}" onchange="actualizarPrecio(${p.id})">
+                <option value="0-100">0–100 unidades</option>
+                <option value="101-200">101–200 unidades</option>
+                <option value="201-300">201–300 unidades</option>
+              </select>
+            </div>
+
+            <div class="precio" id="precio-${p.id}">${p.precios["0-100"].toFixed(2)}</div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function cambiarColor(id) {
+      const select = document.getElementById(`color-${id}`);
+      const nuevaImagen = select.value;
+      document.getElementById(`img-${id}`).src = nuevaImagen;
+      // Actualiza también el precio (por si el usuario cambia color y asume que afecta precio — opcional)
+      actualizarPrecio(id);
+    }
+
+    function actualizarPrecio(id) {
+      const rangoSelect = document.getElementById(`rango-${id}`);
+      const rango = rangoSelect.value;
+      const producto = productos.find(p => p.id === id);
+      const precio = producto.precios[rango];
+      document.getElementById(`precio-${id}`).textContent = precio.toFixed(2);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCatalogo();
+    });
+  </script>
+
+</body>
+</html>
